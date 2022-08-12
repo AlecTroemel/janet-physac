@@ -1,0 +1,3 @@
+[submodule "physac"]
+	path = physac
+	url = https://github.com/raysan5/physac.git
