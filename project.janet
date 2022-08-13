@@ -8,4 +8,4 @@
   :name "janet-physac"
   :cflags ["-Iphysac/src"]
   :source ["main.c"]
-  :headers ["physac/src/physac.h"])
+  :headers ["types.h" "physac/src/physac.h"])
