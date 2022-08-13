@@ -4,7 +4,7 @@
 #include "types.h"
 
 JANET_FN(cfun_init_physics,
-         "($name/init-physics)",
+         "(physac/init-physics)",
          "Initializes physics values, pointers and creates physics loop thread.") {
   janet_fixarity(argc, 0);
   (void) argv;
@@ -13,7 +13,7 @@ JANET_FN(cfun_init_physics,
 }
 
 JANET_FN(cfun_set_physics_gravity,
-         "($name/set-physics-gravity x y)",
+         "(physac/set-physics-gravity x y)",
          "Sets physics global gravity force.") {
   janet_fixarity(argc, 2);
 
@@ -25,7 +25,7 @@ JANET_FN(cfun_set_physics_gravity,
 }
 
 JANET_FN(cfun_create_physics_body_circle,
-         "($name/create-physics-body-circle pos radius density)",
+         "(physac/create-physics-body-circle pos radius density)",
          "Creates a new circle physics body with generic parameters.") {
   janet_fixarity(argc, 3);
 
@@ -38,7 +38,7 @@ JANET_FN(cfun_create_physics_body_circle,
 }
 
 JANET_FN(cfun_create_physics_body_rectangle,
-         "($name/create-physics-body-rectangle pos width height density)",
+         "(physac/create-physics-body-rectangle pos width height density)",
          "Creates a new rectangle physics body with generic parameters.") {
   janet_fixarity(argc, 4);
 
@@ -52,7 +52,7 @@ JANET_FN(cfun_create_physics_body_rectangle,
 }
 
 JANET_FN(cfun_physics_add_force,
-         "($name/physics-add-force force)",
+         "(physac/physics-add-force force)",
          "Adds a force to a physics body") {
   janet_fixarity(argc, 2);
   PhysicsBody body = *physac_getphysicsbody(argv, 0);
@@ -62,7 +62,7 @@ JANET_FN(cfun_physics_add_force,
 }
 
 JANET_FN(cfun_physics_add_torque,
-         "($name/physics-add-torque amount)",
+         "(physac/physics-add-torque amount)",
          "Adds a angular force to a physics body.") {
   janet_fixarity(argc, 2);
   PhysicsBody body = *physac_getphysicsbody(argv, 0);
@@ -73,7 +73,7 @@ JANET_FN(cfun_physics_add_torque,
 
 
 JANET_FN(cfun_get_physics_bodies_count,
-         "($name/get-physics-bodies-count)",
+         "(physac/get-physics-bodies-count)",
          "Returns the current amount of created physics bodies.") {
   janet_fixarity(argc, 0);
   (void) argv;
@@ -82,7 +82,7 @@ JANET_FN(cfun_get_physics_bodies_count,
 }
 
 JANET_FN(cfun_get_physics_body,
-         "($name/get-physics-body index)",
+         "(physac/get-physics-body index)",
          "Returns a physics body of the bodies pool at a specific index") {
   janet_fixarity(argc, 1);
   (void) argv;
@@ -92,7 +92,7 @@ JANET_FN(cfun_get_physics_body,
 }
 
 JANET_FN(cfun_get_physics_shape_type,
-         "($name/get-physics-shape-type index)",
+         "(physac/get-physics-shape-type index)",
          "Returns the physics body shape type (:circle or :polygon)") {
   janet_fixarity(argc, 1);
   (void) argv;
@@ -104,7 +104,7 @@ JANET_FN(cfun_get_physics_shape_type,
 }
 
 JANET_FN(cfun_get_physics_shape_vertices_count,
-         "($name/get-physics-shape-vertices-count index)",
+         "(physac/get-physics-shape-vertices-count index)",
          "Returns the amount of vertices of a physics body shape") {
   janet_fixarity(argc, 1);
   (void) argv;
@@ -115,7 +115,7 @@ JANET_FN(cfun_get_physics_shape_vertices_count,
   return janet_wrap_integer(vertices_count);
 }
 JANET_FN(cfun_set_physics_body_rotation,
-         "($name/set-physics-body-rotation radians)",
+         "(physac/set-physics-body-rotation radians)",
          "Sets physics body shape transform based on radians parameter") {
   janet_fixarity(argc, 2);
   (void) argv;
@@ -127,7 +127,7 @@ JANET_FN(cfun_set_physics_body_rotation,
 
 
 JANET_FN(cfun_destroy_physics_body,
-         "($name/destroy-physics-body body)",
+         "(physac/destroy-physics-body body)",
          "Unitializes and destroy a physics body") {
   janet_fixarity(argc, 1);
   PhysicsBody body = *physac_getphysicsbody(argv, 0);
@@ -136,7 +136,7 @@ JANET_FN(cfun_destroy_physics_body,
 }
 
 JANET_FN(cfun_close_physics,
-         "($name/close-physics)",
+         "(physac/close-physics)",
          "Unitializes physics pointers and closes physics loop thread") {
   janet_fixarity(argc, 0);
   (void) argv;
