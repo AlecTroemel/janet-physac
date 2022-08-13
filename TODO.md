@@ -1,0 +1,12 @@
+- [ ] CreatePhysicsBodyPolygon
+- [ ] PhysicsShatter
+- [x] int GetPhysicsBodiesCount(void);
+- [x] PhysicsBody GetPhysicsBody(int index);
+- [ ] int GetPhysicsShapeType(int index);
+- [ ] int GetPhysicsShapeVerticesCount(int index);
+- [ ] Vector2 GetPhysicsShapeVertex(PhysicsBody body, int vertex);
+- [ ] void SetPhysicsBodyRotation(PhysicsBody body, float radians);
+- [x] void DestroyPhysicsBody(PhysicsBody body);
+- [x] void ClosePhysics(void);
+- [x] Physicsbody getter function
+- [x] Physicsbody setter function
