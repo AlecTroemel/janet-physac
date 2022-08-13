@@ -1,6 +1,3 @@
-#include <janet/janet.h>
-#include "physac.h"
-
 static float idx_getfloat(JanetView idx, int index) {
   if (index >= idx.len) {
     janet_panicf("index %d outside of range [0, %d)", idx.len);
