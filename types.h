@@ -231,6 +231,12 @@ void physicsbody_put(void *p, Janet key, Janet value) {
     ensure_boolean(value);
     body->useGravity = janet_unwrap_boolean(value);
   }
+
+  if (!janet_cstrcmp(kw, "rotation")) {
+    ensure_number(value);
+    float radians = janet_unwrap_number(value);
+    SetPhysicsBodyRotation(body, radians);
+  }
 }
 
 static PhysicsBody *physac_getphysicsbody(const Janet *argv, int32_t n) {

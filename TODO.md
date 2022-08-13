@@ -12,7 +12,7 @@
 - [x] GetPhysicsShapeType
 - [x] GetPhysicsShapeVerticesCount
 - [ ] GetPhysicsShapeVertex
-- [ ] SetPhysicsBodyRotation
+- [x] SetPhysicsBodyRotation
 - [x] DestroyPhysicsBody
 - [x] ClosePhysics
 - [x] Physicsbody getter function

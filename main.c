@@ -114,6 +114,16 @@ JANET_FN(cfun_get_physics_shape_vertices_count,
 
   return janet_wrap_integer(vertices_count);
 }
+JANET_FN(cfun_set_physics_body_rotation,
+         "($name/set-physics-body-rotation radians)",
+         "Sets physics body shape transform based on radians parameter") {
+  janet_fixarity(argc, 2);
+  (void) argv;
+  PhysicsBody body = *physac_getphysicsbody(argv, 0);
+  float radians = janet_getnumber(argv, 1);
+  SetPhysicsBodyRotation(body, radians);
+  return janet_wrap_nil();
+}
 
 
 JANET_FN(cfun_destroy_physics_body,
@@ -146,6 +156,7 @@ JANET_MODULE_ENTRY(JanetTable *env) {
     JANET_REG("get-physics-body", cfun_get_physics_body),
     JANET_REG("get-physics-shape-type", cfun_get_physics_shape_type),
     JANET_REG("get-physics-shape-vertices-count", cfun_get_physics_shape_vertices_count),
+    JANET_REG("set-physics-body-rotation", cfun_set_physics_body_rotation),
     JANET_REG("destroy-physics-body", cfun_destroy_physics_body),
     JANET_REG("close-physics", cfun_close_physics),
     JANET_REG_END
