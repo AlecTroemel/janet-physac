@@ -133,6 +133,20 @@ int physicsbody_get(void *p, Janet key, Janet *out) {
     return 1;
   }
 
+  if (!janet_cstrcmp(kw, "shape-type")) {
+    int index = body->id;
+    int shape_type = GetPhysicsShapeType(index);
+    *out = physac_wrap_shapetype(shape_type);
+    return 1;
+  }
+
+  if (!janet_cstrcmp(kw, "vertices-count")) {
+    int index = body->id;
+    int vertices_count = GetPhysicsShapeVerticesCount(index);
+    *out = janet_wrap_integer(vertices_count);
+    return 1;
+  }
+
   return 0;
 }
 
