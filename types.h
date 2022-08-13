@@ -30,6 +30,18 @@ static Vector2 physac_unwrap_vec2(const Janet val) {
   return (Vector2) { x, y };
 }
 
+static Janet physac_wrap_shapetype(int shape_type) {
+  if (shape_type == PHYSICS_CIRCLE) {
+    return janet_ckeywordv("circle");
+  }
+
+  if (shape_type == PHYSICS_POLYGON) {
+    return janet_ckeywordv("polygon");
+  }
+
+  janet_panic("expected shape type");
+}
+
 int physicsbody_get(void *p, Janet key, Janet *out);
 void physicsbody_put(void *p, Janet key, Janet value);
 
