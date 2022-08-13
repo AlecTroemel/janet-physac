@@ -9,8 +9,8 @@
 - [ ] PhysicsShatter
 - [x] GetPhysicsBodiesCount
 - [x] GetPhysicsBody
-- [ ] GetPhysicsShapeType
-- [ ] GetPhysicsShapeVerticesCount
+- [x] GetPhysicsShapeType
+- [x] GetPhysicsShapeVerticesCount
 - [ ] GetPhysicsShapeVertex
 - [ ] SetPhysicsBodyRotation
 - [x] DestroyPhysicsBody
