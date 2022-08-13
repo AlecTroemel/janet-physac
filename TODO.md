@@ -1,12 +1,19 @@
+- [x] InitPhysics
+- [x] IsPhysicsEnabled.. listed in readme but not in src file...
+- [x] SetPhysicsGravity
+- [x] CreatePhysicsBodyCircle
+- [x] CreatePhysicsBodyRectangle
 - [ ] CreatePhysicsBodyPolygon
+- [x] PhysicsAddForce
+- [x] PhysicsAddTorque
 - [ ] PhysicsShatter
-- [x] int GetPhysicsBodiesCount(void);
-- [x] PhysicsBody GetPhysicsBody(int index);
-- [ ] int GetPhysicsShapeType(int index);
-- [ ] int GetPhysicsShapeVerticesCount(int index);
-- [ ] Vector2 GetPhysicsShapeVertex(PhysicsBody body, int vertex);
-- [ ] void SetPhysicsBodyRotation(PhysicsBody body, float radians);
-- [x] void DestroyPhysicsBody(PhysicsBody body);
-- [x] void ClosePhysics(void);
+- [x] GetPhysicsBodiesCount
+- [x] GetPhysicsBody
+- [ ] GetPhysicsShapeType
+- [ ] GetPhysicsShapeVerticesCount
+- [ ] GetPhysicsShapeVertex
+- [ ] SetPhysicsBodyRotation
+- [x] DestroyPhysicsBody
+- [x] ClosePhysics
 - [x] Physicsbody getter function
 - [x] Physicsbody setter function
