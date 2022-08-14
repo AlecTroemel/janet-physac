@@ -7,5 +7,5 @@
 (declare-native
   :name "janet-physac"
   :cflags ["-Iphysac/src"]
-  :source ["main.c"]
-  :headers ["types.h" "physac/src/physac.h"])
+  :source ["src/main.c"]
+  :headers ["src/types.h" "physac/src/physac.h"])
