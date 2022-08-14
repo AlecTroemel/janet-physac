@@ -1,4 +1,6 @@
 #include <janet/janet.h>
+
+#define PHYSAC_IMPLEMENTATION
 #include <physac.h>
 
 #include "types.h"
@@ -9,6 +11,25 @@ JANET_FN(cfun_init_physics,
   janet_fixarity(argc, 0);
   (void) argv;
   InitPhysics();
+  return janet_wrap_nil();
+}
+
+JANET_FN(cfun_update_physics,
+         "(physac/update-physics)",
+         "Update physics system.") {
+  janet_fixarity(argc, 0);
+  (void) argv;
+  UpdatePhysics();
+  return janet_wrap_nil();
+}
+
+JANET_FN(cfun_set_physics_timestep,
+         "(physac/set-physics-timestep)",
+         "Sets physics fixed time step in milliseconds. 1.666666 by default.") {
+  janet_fixarity(argc, 1);
+  (void) argv;
+  double delta = janet_getnumber(argv, 0);
+  SetPhysicsTimeStep(delta);
   return janet_wrap_nil();
 }
 
@@ -173,6 +194,8 @@ JANET_FN(cfun_close_physics,
 JANET_MODULE_ENTRY(JanetTable *env) {
   JanetRegExt cfuns[] = {
     JANET_REG("init-physics", cfun_init_physics),
+    JANET_REG("update-physics", cfun_update_physics),
+    JANET_REG("set-physics-timestep", cfun_set_physics_timestep),
     JANET_REG("set-physics-gravity", cfun_set_physics_gravity),
     JANET_REG("create-physics-body-circle", cfun_create_physics_body_circle),
     JANET_REG("create-physics-body-rectangle", cfun_create_physics_body_rectangle),
