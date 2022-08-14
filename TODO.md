@@ -3,7 +3,7 @@
 - [x] SetPhysicsGravity
 - [x] CreatePhysicsBodyCircle
 - [x] CreatePhysicsBodyRectangle
-- [ ] CreatePhysicsBodyPolygon
+- [x] CreatePhysicsBodyPolygon
 - [x] PhysicsAddForce
 - [x] PhysicsAddTorque
 - [ ] PhysicsShatter
@@ -11,7 +11,7 @@
 - [x] GetPhysicsBody
 - [x] GetPhysicsShapeType
 - [x] GetPhysicsShapeVerticesCount
-- [ ] GetPhysicsShapeVertex
+- [x] GetPhysicsShapeVertex
 - [x] SetPhysicsBodyRotation
 - [x] DestroyPhysicsBody
 - [x] ClosePhysics
