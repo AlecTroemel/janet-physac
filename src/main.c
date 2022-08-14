@@ -23,6 +23,15 @@ JANET_FN(cfun_update_physics,
   return janet_wrap_nil();
 }
 
+JANET_FN(cfun_reset_physics,
+         "(physac/reset-physics)",
+         "Reset physics system.") {
+  janet_fixarity(argc, 0);
+  (void) argv;
+  ResetPhysics();
+  return janet_wrap_nil();
+}
+
 JANET_FN(cfun_set_physics_timestep,
          "(physac/set-physics-timestep)",
          "Sets physics fixed time step in milliseconds. 1.666666 by default.") {
@@ -53,10 +62,12 @@ JANET_FN(cfun_create_physics_body_circle,
   Vector2 pos = physac_getvec2(argv, 0);
   float radius = janet_getnumber(argv, 1);
   float density = janet_getnumber(argv, 2);
-  PhysicsBody body = janet_abstract(&AT_PhysicsBody, sizeof(PhysicsBodyData));
-  *body = *CreatePhysicsBodyCircle(pos, radius, density);
 
-  return janet_wrap_abstract(body);
+  PhysicsBodyWrapper *wrapper = janet_abstract(&AT_PhysicsBodyWrapper, sizeof(PhysicsBodyWrapper));
+  PhysicsBody body = CreatePhysicsBodyCircle(pos, radius, density);
+  wrapper->handle = body;
+
+  return janet_wrap_abstract(wrapper);
 }
 
 JANET_FN(cfun_create_physics_body_rectangle,
@@ -69,10 +80,11 @@ JANET_FN(cfun_create_physics_body_rectangle,
   float height = janet_getnumber(argv, 2);
   float density = janet_getnumber(argv, 3);
 
-  PhysicsBody body = janet_abstract(&AT_PhysicsBody, sizeof(PhysicsBodyData));
-  *body = *CreatePhysicsBodyRectangle(pos, width, height, density);
+  PhysicsBodyWrapper *wrapper = janet_abstract(&AT_PhysicsBodyWrapper, sizeof(PhysicsBodyWrapper));
+  PhysicsBody body = CreatePhysicsBodyRectangle(pos, width, height, density);
+  wrapper->handle = body;
 
-  return janet_wrap_abstract(body);
+  return janet_wrap_abstract(wrapper);
 }
 
 JANET_FN(cfun_create_physics_body_polygon,
@@ -84,17 +96,18 @@ JANET_FN(cfun_create_physics_body_polygon,
   float radius = janet_getnumber(argv, 1);
   int sides = janet_getinteger(argv, 2);
   float density = janet_getnumber(argv, 3);
-  PhysicsBody body = janet_abstract(&AT_PhysicsBody, sizeof(PhysicsBodyData));
-  *body = *CreatePhysicsBodyPolygon(pos, radius, sides, density);
 
-  return janet_wrap_abstract(body);
+  PhysicsBodyWrapper *wrapper = janet_abstract(&AT_PhysicsBodyWrapper, sizeof(PhysicsBodyWrapper));
+  PhysicsBody body = CreatePhysicsBodyPolygon(pos, radius, sides, density);
+  wrapper->handle = body;
+  return janet_wrap_abstract(wrapper);
 }
 
 JANET_FN(cfun_physics_add_force,
          "(physac/physics-add-force force)",
          "Adds a force to a physics body") {
   janet_fixarity(argc, 2);
-  PhysicsBody body = *physac_getphysicsbody(argv, 0);
+  PhysicsBody body = physac_getphysicsbody(argv, 0);
   Vector2 force = physac_getvec2(argv, 1);
   PhysicsAddForce(body, force);
   return janet_wrap_nil();
@@ -104,7 +117,7 @@ JANET_FN(cfun_physics_add_torque,
          "(physac/physics-add-torque amount)",
          "Adds a angular force to a physics body.") {
   janet_fixarity(argc, 2);
-  PhysicsBody body = *physac_getphysicsbody(argv, 0);
+  PhysicsBody body = physac_getphysicsbody(argv, 0);
   float amount = janet_getnumber(argv, 1);
   PhysicsAddTorque(body, amount);
   return janet_wrap_nil();
@@ -126,8 +139,10 @@ JANET_FN(cfun_get_physics_body,
   janet_fixarity(argc, 1);
   (void) argv;
   int index = janet_getinteger(argv, 0);
+  PhysicsBodyWrapper *wrapper = janet_abstract(&AT_PhysicsBodyWrapper, sizeof(PhysicsBodyWrapper));
   PhysicsBody body = GetPhysicsBody(index);
-  return janet_wrap_abstract(body);
+  wrapper->handle = body;
+  return janet_wrap_abstract(wrapper);
 }
 
 JANET_FN(cfun_get_physics_shape_type,
@@ -160,7 +175,7 @@ JANET_FN(cfun_get_physics_shape_vertex,
   janet_fixarity(argc, 2);
   (void) argv;
 
-  PhysicsBody body = *physac_getphysicsbody(argv, 0);
+  PhysicsBody body = physac_getphysicsbody(argv, 0);
   int vertex = janet_getinteger(argv, 1);
   Vector2 position = GetPhysicsShapeVertex(body, vertex);
   return physac_wrap_vec2(position);
@@ -171,7 +186,7 @@ JANET_FN(cfun_set_physics_body_rotation,
          "Sets physics body shape transform based on radians parameter") {
   janet_fixarity(argc, 2);
   (void) argv;
-  PhysicsBody body = *physac_getphysicsbody(argv, 0);
+  PhysicsBody body = physac_getphysicsbody(argv, 0);
   float radians = janet_getnumber(argv, 1);
   SetPhysicsBodyRotation(body, radians);
   return janet_wrap_nil();
@@ -181,7 +196,7 @@ JANET_FN(cfun_destroy_physics_body,
          "(physac/destroy-physics-body body)",
          "Unitializes and destroy a physics body") {
   janet_fixarity(argc, 1);
-  PhysicsBody body = *physac_getphysicsbody(argv, 0);
+  PhysicsBody body = physac_getphysicsbody(argv, 0);
   DestroyPhysicsBody(body);
   return janet_wrap_nil();
 }
@@ -198,6 +213,7 @@ JANET_FN(cfun_close_physics,
 JANET_MODULE_ENTRY(JanetTable *env) {
   JanetRegExt cfuns[] = {
     JANET_REG("init-physics", cfun_init_physics),
+    JANET_REG("reset-physics", cfun_reset_physics),
     JANET_REG("update-physics", cfun_update_physics),
     JANET_REG("set-physics-timestep", cfun_set_physics_timestep),
     JANET_REG("set-physics-gravity", cfun_set_physics_gravity),
