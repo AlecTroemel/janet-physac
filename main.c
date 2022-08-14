@@ -114,6 +114,7 @@ JANET_FN(cfun_get_physics_shape_vertices_count,
 
   return janet_wrap_integer(vertices_count);
 }
+
 JANET_FN(cfun_set_physics_body_rotation,
          "(physac/set-physics-body-rotation radians)",
          "Sets physics body shape transform based on radians parameter") {
@@ -124,7 +125,6 @@ JANET_FN(cfun_set_physics_body_rotation,
   SetPhysicsBodyRotation(body, radians);
   return janet_wrap_nil();
 }
-
 
 JANET_FN(cfun_destroy_physics_body,
          "(physac/destroy-physics-body body)",
