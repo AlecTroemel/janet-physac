@@ -53,7 +53,8 @@ JANET_FN(cfun_create_physics_body_circle,
   Vector2 pos = physac_getvec2(argv, 0);
   float radius = janet_getnumber(argv, 1);
   float density = janet_getnumber(argv, 2);
-  PhysicsBody body = CreatePhysicsBodyCircle(pos, radius, density);
+  PhysicsBody body = janet_abstract(&AT_PhysicsBody, sizeof(PhysicsBodyData));
+  *body = *CreatePhysicsBodyCircle(pos, radius, density);
 
   return janet_wrap_abstract(body);
 }
@@ -67,7 +68,9 @@ JANET_FN(cfun_create_physics_body_rectangle,
   float width = janet_getnumber(argv, 1);
   float height = janet_getnumber(argv, 2);
   float density = janet_getnumber(argv, 3);
-  PhysicsBody body = CreatePhysicsBodyRectangle(pos, width, height, density);
+
+  PhysicsBody body = janet_abstract(&AT_PhysicsBody, sizeof(PhysicsBodyData));
+  *body = *CreatePhysicsBodyRectangle(pos, width, height, density);
 
   return janet_wrap_abstract(body);
 }
@@ -81,7 +84,8 @@ JANET_FN(cfun_create_physics_body_polygon,
   float radius = janet_getnumber(argv, 1);
   int sides = janet_getinteger(argv, 2);
   float density = janet_getnumber(argv, 3);
-  PhysicsBody body = CreatePhysicsBodyPolygon(pos, radius, sides, density);
+  PhysicsBody body = janet_abstract(&AT_PhysicsBody, sizeof(PhysicsBodyData));
+  *body = *CreatePhysicsBodyPolygon(pos, radius, sides, density);
 
   return janet_wrap_abstract(body);
 }

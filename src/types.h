@@ -55,7 +55,7 @@ static const JanetAbstractType AT_PhysicsBody = {
 };
 
 int physicsbody_get(void *p, Janet key, Janet *out) {
-  PhysicsBody body = (PhysicsBody)p;
+  PhysicsBodyData *body = (PhysicsBodyData *)p;
 
   if (!janet_checktype(key, JANET_KEYWORD)) {
     janet_panic("expected keyword");
@@ -171,6 +171,7 @@ void ensure_number(Janet value) {
 void physicsbody_put(void *p, Janet key, Janet value) {
   PhysicsBody body = (PhysicsBody)p;
 
+
   if (!janet_checktype(key, JANET_KEYWORD)) {
     janet_panic("expected keyword");
   }
@@ -182,61 +183,61 @@ void physicsbody_put(void *p, Janet key, Janet value) {
     body->enabled = janet_unwrap_boolean(value);
   }
 
-  if (!janet_cstrcmp(kw, "position")) {
-    ensure_vec2(value);
-    body->position = physac_unwrap_vec2(value);
-  }
+  /* if (!janet_cstrcmp(kw, "position")) { */
+  /*   ensure_vec2(value); */
+  /*   body->position = physac_unwrap_vec2(value); */
+  /* } */
 
-  if (!janet_cstrcmp(kw, "velocity")) {
-    ensure_vec2(value);
-    body->velocity = physac_unwrap_vec2(value);
-  }
+  /* if (!janet_cstrcmp(kw, "velocity")) { */
+  /*   ensure_vec2(value); */
+  /*   body->velocity = physac_unwrap_vec2(value); */
+  /* } */
 
-  if (!janet_cstrcmp(kw, "force")) {
-    ensure_vec2(value);
-    body->force = physac_unwrap_vec2(value);
-  }
+  /* if (!janet_cstrcmp(kw, "force")) { */
+  /*   ensure_vec2(value); */
+  /*   body->force = physac_unwrap_vec2(value); */
+  /* } */
 
-  if (!janet_cstrcmp(kw, "angular-velocity")) {
-    ensure_number(value);
-    body->angularVelocity = janet_unwrap_number(value);
-  }
+  /* if (!janet_cstrcmp(kw, "angular-velocity")) { */
+  /*   ensure_number(value); */
+  /*   body->angularVelocity = janet_unwrap_number(value); */
+  /* } */
 
-  if (!janet_cstrcmp(kw, "torque")) {
-    ensure_number(value);
-    body->torque = janet_unwrap_number(value);
-  }
+  /* if (!janet_cstrcmp(kw, "torque")) { */
+  /*   ensure_number(value); */
+  /*   body->torque = janet_unwrap_number(value); */
+  /* } */
 
-  if (!janet_cstrcmp(kw, "orient")) {
-    ensure_number(value);
-    body->orient = janet_unwrap_number(value);
-  }
+  /* if (!janet_cstrcmp(kw, "orient")) { */
+  /*   ensure_number(value); */
+  /*   body->orient = janet_unwrap_number(value); */
+  /* } */
 
-  if (!janet_cstrcmp(kw, "static-friction")) {
-    ensure_number(value);
-    body->staticFriction = janet_unwrap_number(value);
-  }
+  /* if (!janet_cstrcmp(kw, "static-friction")) { */
+  /*   ensure_number(value); */
+  /*   body->staticFriction = janet_unwrap_number(value); */
+  /* } */
 
-  if (!janet_cstrcmp(kw, "dynamic-friction")) {
-    ensure_number(value);
-    body->dynamicFriction = janet_unwrap_number(value);
-  }
+  /* if (!janet_cstrcmp(kw, "dynamic-friction")) { */
+  /*   ensure_number(value); */
+  /*   body->dynamicFriction = janet_unwrap_number(value); */
+  /* } */
 
-  if (!janet_cstrcmp(kw, "restitution")) {
-    ensure_number(value);
-    body->restitution = janet_unwrap_number(value);
-  }
+  /* if (!janet_cstrcmp(kw, "restitution")) { */
+  /*   ensure_number(value); */
+  /*   body->restitution = janet_unwrap_number(value); */
+  /* } */
 
-  if (!janet_cstrcmp(kw, "use-gravity")) {
-    ensure_boolean(value);
-    body->useGravity = janet_unwrap_boolean(value);
-  }
+  /* if (!janet_cstrcmp(kw, "use-gravity")) { */
+  /*   ensure_boolean(value); */
+  /*   body->useGravity = janet_unwrap_boolean(value); */
+  /* } */
 
-  if (!janet_cstrcmp(kw, "rotation")) {
-    ensure_number(value);
-    float radians = janet_unwrap_number(value);
-    SetPhysicsBodyRotation(body, radians);
-  }
+  /* if (!janet_cstrcmp(kw, "rotation")) { */
+  /*   ensure_number(value); */
+  /*   float radians = janet_unwrap_number(value); */
+  /*   SetPhysicsBodyRotation(body, radians); */
+  /* } */
 }
 
 static PhysicsBody *physac_getphysicsbody(const Janet *argv, int32_t n) {
