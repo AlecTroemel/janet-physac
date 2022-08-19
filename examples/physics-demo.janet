@@ -29,6 +29,7 @@
   (init-window SCREEN_WIDTH SCREEN_HEIGHT "physac in janet")
   (set-target-fps 60)
   (init-physics)
+  (set-physics-gravity 0 1)
   (create-floor)
   (create-circle))
 
@@ -53,7 +54,8 @@
      (+ 10 (math/rng-int RNG 35))
      10))
 
-  (for i 0 (get-physics-bodies-count)
+  # NOTE: iterating in reverse order here
+  (each i (range (- (get-physics-bodies-count) 1) -1 -1)
     (if-let [body (get-physics-body i)
              below-screen (> (get-in body [:position 1])
                              (* SCREEN_HEIGHT 2))]
@@ -80,6 +82,7 @@
   (draw-text "Left mouse button to create a polygon" 10 10 10 :white)
   (draw-text "Right mouse button to create a circle" 10 25 10 :white)
   (draw-text "Press 'R' to reset example" 10 40 10 :white)
+  (draw-text (string/format "body count: %n" (get-physics-bodies-count)) 10 55 10 :white)
   (end-drawing))
 
 (init)
