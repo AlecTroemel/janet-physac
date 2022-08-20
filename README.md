@@ -1,3 +1,5 @@
+### After possibly the shortest turnaround in the history of a git repo. Im archiving these bindings in favor of [chipmunk 2d bindings](https://github.com/slembcke/Chipmunk2D). Turns out Physac was mainly built as an example and not intended for real use.
+
 # janet-physac
 
 [Janet](https://janet-lang.org) bindings to [Physac](https://github.com/raysan5/physac). The bindings
